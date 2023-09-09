@@ -1,5 +1,8 @@
-from blog.models import Comment, Post, User
 from django import forms
+from blog.models import User, Comment, Post
+
+POST_FORM_INT: int = '5'
+COMMENT_FORM_INT: int = '3'
 
 
 class CommentForm(forms.ModelForm):
@@ -8,7 +11,7 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ('text',)
         widget = {
-            'text': forms.Textarea({'rows': '3'})
+            'text': forms.Textarea({'rows': COMMENT_FORM_INT})
         }
 
 
@@ -18,7 +21,7 @@ class PostForm(forms.ModelForm):
         model = Post
         exclude = ('author', 'created_at')
         widgets = {
-            'text': forms.Textarea({'rows': '5'}),
+            'text': forms.Textarea({'rows': POST_FORM_INT}),
             'pub_date': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
         }
 
@@ -31,5 +34,5 @@ class ProfileForm(forms.ModelForm):
             'username',
             'first_name',
             'last_name',
-            'email'
+            'email',
         )

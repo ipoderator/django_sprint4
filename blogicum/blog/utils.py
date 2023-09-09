@@ -8,12 +8,12 @@ def post_all_query():
     '''Вернуть все посты'''
     query_set = (
         Post.objects.select_related(
-            "category",
-            "location",
-            "author",
+            'category',
+            'location',
+            'author',
         )
-        .annotate(comment_count=Count("comments"))
-        .order_by("-pub_date")
+        .annotate(comment_count=Count('comments'))
+        .order_by('-pub_date')
     )
     return query_set
 
@@ -30,7 +30,7 @@ def post_published_query():
 
 class DataMixin:
     def dispatch(self, request, *args, **kwargs):
-        """Отправляет изменения/удаления поста"""
+        '''Отправляет изменения/удаления поста'''
         self.post_id = kwargs['pk']
         if self.get_object().author != request.user:
             return redirect('blog:post_detail', pk=self.post_id)

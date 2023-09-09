@@ -1,20 +1,20 @@
 from django.contrib import admin
-from .models import Category, Location, Post
+from blog.models import Category, Location, Post
 
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    pass
+    '''Админ'''
 
 
 @admin.register(Location)
 class LocationAdmin(admin.ModelAdmin):
-    pass
+    '''Локация'''
 
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    pass
+    '''Пост'''
 
 
 class BlogAdmin(admin.ModelAdmin):
