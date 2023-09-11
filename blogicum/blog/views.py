@@ -7,9 +7,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView
 from django.db.models import Count
-
-from blog.models import Category, Comment, Post
-from blog.forms import CommentForm, PostForm, ProfileForm
 from django.views.generic import (
     CreateView,
     DeleteView,
@@ -17,13 +14,14 @@ from django.views.generic import (
     ListView,
     UpdateView,
 )
+
+from blog.models import Category, Comment, Post
+from blog.forms import CommentForm, PostForm, ProfileForm
 from blog.utils import (
     post_all_query,
     post_published_query,
     DataMixin,
 )
-
-CURRENT_TIME = timezone.now()
 
 
 class MainPostListView(ListView):
@@ -175,7 +173,7 @@ def category_posts(request, category_slug):
         is_published=True,
     )
     category_list = category.posts.filter(
-        pub_date__lte=CURRENT_TIME,
+        pub_date__lte=timezone.now(),
         is_published=True,
     ).select_related(
         'category',
